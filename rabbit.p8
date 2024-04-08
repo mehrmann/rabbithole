@@ -120,15 +120,14 @@ function draw_game()
 		for f in all(floats) do
 			oprint8(f.txt,f.x,f.y,f.c,0)
 		end
-		
-		for p in all(particles) do
-			spr(p.ani+4-(p.dur/16),p.x,p.y)
-			p.dur-=1
-			if p.dur==0 then
-				del(particles,p)
-			end
+	end
+	
+	for p in all(particles) do
+		spr(p.ani+p.t/(p.dur/4),p.x,p.y)
+		p.t+=1
+		if p.t>=p.dur then
+			del(particles,p)
 		end
-		
 	end
 end
 -->8
@@ -322,7 +321,7 @@ function dofloats()
 end
 
 function addparticle(_ani,_x,_y)
-	add(particles,{ani=_ani,x=_x,y=_y,dur=64})
+	add(particles,{ani=_ani,x=_x,y=_y,dur=32,t=0})
 end
 
 -->8
